@@ -19,5 +19,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('data/', include('data_input.urls')),  # 这一行是连接到应用路由
+    path('api/', include('data_input.urls')),
 ]

@@ -94,7 +94,6 @@ class BasicTusi(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'basic_tusi'
         db_table_comment = '土司基础信息'
 
@@ -105,7 +104,6 @@ class BasicXiajing(models.Model):
     xiajing_text = models.TextField(db_comment='辖境释文编号')
 
     class Meta:
-        managed = False
         db_table = 'basic_xiajing'
         db_table_comment = '土司辖境范围'
 
@@ -135,7 +133,6 @@ class BasicZhiguan(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'basic_zhiguan'
         db_table_comment = '土司职官信息'
 
@@ -156,7 +153,6 @@ class BasicZhudi(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'basic_zhudi'
         db_table_comment = '土司驻地的相关信息'
 
@@ -214,7 +210,6 @@ class RelationshipTusi(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'relationship_tusi'
         db_table_comment = '土司相互关系表'
 
@@ -228,7 +223,6 @@ class RelationshipXiajing(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'relationship_xiajing'
         db_table_comment = '土司辖境关系表'
 
@@ -242,7 +236,6 @@ class RelationshipZhiguan(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'relationship_zhiguan'
         db_table_comment = '土司职官关系表'
 
@@ -256,6 +249,5 @@ class RelationshipZhudi(models.Model):
     author = models.CharField(max_length=255, db_comment='作者')
 
     class Meta:
-        managed = False
         db_table = 'relationship_zhudi'
         db_table_comment = '土司驻地关系'

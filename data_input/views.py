@@ -1,13 +1,21 @@
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.db import models as django_models
 from . import models
 import json
 
+from rest_framework import viewsets
+from .models import (
+    BasicTusi, BasicXiajing, BasicZhiguan, BasicZhudi,
+    RelationshipTusi, RelationshipXiajing, RelationshipZhiguan, RelationshipZhudi
+)
+from .serializers import (
+    BasicTusiSerializer, BasicXiajingSerializer, BasicZhiguanSerializer, BasicZhudiSerializer,
+    RelationshipTusiSerializer, RelationshipXiajingSerializer, RelationshipZhiguanSerializer, RelationshipZhudiSerializer
+)
 
-# @csrf_exempt 是一个临时解决方案，它会禁用 CSRF 保护。
-# 在生产环境中，你需要与前端团队合作，正确地处理 CSRF token。
+
 @csrf_exempt
 @require_POST
 def create_data(request, model_name):
@@ -78,3 +86,36 @@ def create_data(request, model_name):
 
     except Exception as e:
         return JsonResponse({'error': f'Failed to create instance: {e}'}, status=400)
+
+
+class BasicTusiViewSet(viewsets.ModelViewSet):
+    queryset = BasicTusi.objects.all()
+    serializer_class = BasicTusiSerializer
+
+class BasicXiajingViewSet(viewsets.ModelViewSet):
+    queryset = BasicXiajing.objects.all()
+    serializer_class = BasicXiajingSerializer
+
+class BasicZhiguanViewSet(viewsets.ModelViewSet):
+    queryset = BasicZhiguan.objects.all()
+    serializer_class = BasicZhiguanSerializer
+
+class BasicZhudiViewSet(viewsets.ModelViewSet):
+    queryset = BasicZhudi.objects.all()
+    serializer_class = BasicZhudiSerializer
+
+class RelationshipTusiViewSet(viewsets.ModelViewSet):
+    queryset = RelationshipTusi.objects.all()
+    serializer_class = RelationshipTusiSerializer
+
+class RelationshipXiajingViewSet(viewsets.ModelViewSet):
+    queryset = RelationshipXiajing.objects.all()
+    serializer_class = RelationshipXiajingSerializer
+
+class RelationshipZhiguanViewSet(viewsets.ModelViewSet):
+    queryset = RelationshipZhiguan.objects.all()
+    serializer_class = RelationshipZhiguanSerializer
+
+class RelationshipZhudiViewSet(viewsets.ModelViewSet):
+    queryset = RelationshipZhudi.objects.all()
+    serializer_class = RelationshipZhudiSerializer
