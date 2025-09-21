@@ -1,0 +1,30 @@
+{% load my_filters %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>录入数据 - {{ model_name }}</title>
+</head>
+<body>
+    <h1>录入 {{ model_name }} 数据</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% for field in fields %}
+            <div>
+                <label for="{{ field.name }}">{{ field.verbose_name }} ({{ field.name }})：</label><br>
+                {% if field.is_relation and field.many_to_one %}
+                    <select id="{{ field.name }}" name="{{ field.name }}">
+                        {% for obj in related_objects|get_item:field.name %}
+                            <option value="{{ obj.pk }}">{{ obj }}</option>
+                        {% endfor %}
+                    </select>
+                {% else %}
+                    <input type="text" id="{{ field.name }}" name="{{ field.name }}">
+                {% endif %}
+            </div>
+        {% endfor %}
+        <br>
+        <input type="submit" value="提交">
+    </form>
+</body>
+</html>

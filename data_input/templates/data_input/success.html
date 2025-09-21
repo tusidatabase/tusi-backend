@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>提交成功</title>
+</head>
+<body>
+    <h1>恭喜！</h1>
+    <p>您的 {{ model_name }} 数据已成功保存到数据库。</p>
+    <p><a href="/">返回首页</a></p>
+    <p><a href="{% url 'data_input' model_name %}">继续录入 {{ model_name }}</a></p>
+</body>
+</html>
