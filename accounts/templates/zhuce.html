@@ -1,0 +1,8 @@
+<form method="POST" action="/accounts/zhuce/">
+  {% csrf_token %}
+  <input type="text" name="username" placeholder="账号" required>
+  <input type="password" name="password" placeholder="密码" required>
+  <input type="text" name="invite" placeholder="注册码" required>
+  <button type="submit">注册</button>
+</form>
+

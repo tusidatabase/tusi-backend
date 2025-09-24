@@ -1,0 +1,17 @@
+<h2>注册用户列表</h2>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>账号</th>
+    <th>密码</th>
+    <th>注册时间</th>
+  </tr>
+  {% for u in users %}
+  <tr>
+    <td>{{ u.id }}</td>
+    <td>{{ u.username }}</td>
+    <td>{{ u.password }}</td>
+    <td>{{ u.created_at }}</td>
+  </tr>
+  {% endfor %}
+</table>

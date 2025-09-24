@@ -1,17 +1,13 @@
-# data_input/urls.py
-
-# 导入
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from . import views
 from .views import (
     BasicTusiViewSet, BasicXiajingViewSet, BasicZhiguanViewSet, BasicZhudiViewSet,
     RelationshipTusiViewSet, RelationshipXiajingViewSet, RelationshipZhiguanViewSet, RelationshipZhudiViewSet
 )
 
-
 # 使用 DefaultRouter 自动生成路由
 router = DefaultRouter()
+# 为每个 ViewSet 注册路由，DRF 会自动生成 /tusi/, /tusi/{id}/ 等路由
 router.register(r'tusi', BasicTusiViewSet)
 router.register(r'xiajing', BasicXiajingViewSet)
 router.register(r'zhiguan', BasicZhiguanViewSet)
@@ -24,9 +20,6 @@ router.register(r'zhudi-relationship', RelationshipZhudiViewSet)
 
 # 合并所有路由
 urlpatterns = [
-    # 你的原始路由
-    path('api/create/<str:model_name>/', views.create_data, name='create_data_api'),
-
-    # 新添加的 REST framework 路由
+    # 这一行就是你的所有 DRF 接口，无需手动创建其他 api/create/ 路由
     path('', include(router.urls)),
 ]

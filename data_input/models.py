@@ -1,11 +1,5 @@
-# This is an auto-generated Django model module.
-# You'll have to do the following manually to clean this up:
-#   * Rearrange models' order
-#   * Make sure each model has one field with primary_key=True
-#   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
-# Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class AuthGroup(models.Model):
@@ -91,7 +85,7 @@ class BasicTusi(models.Model):
     end_date_4 = models.IntegerField(blank=True, null=True, db_comment='土司废除时间（数字时间）')
     end_reason = models.CharField(max_length=255, blank=True, null=True, db_comment='土司废除的原因')
     belong_state = models.CharField(max_length=255, db_comment='土司上属行政区划')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'basic_tusi'
@@ -102,6 +96,7 @@ class BasicXiajing(models.Model):
     xiajing_id = models.IntegerField(primary_key=True, db_comment='土司辖境释文编号')
     tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, db_comment='所属土司编号')
     xiajing_text = models.TextField(db_comment='辖境释文编号')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'basic_xiajing'
@@ -130,7 +125,7 @@ class BasicZhiguan(models.Model):
     death_date_3 = models.CharField(max_length=255, blank=True, null=True, db_comment='死亡时间(具体年份-中文）')
     death_date_4 = models.IntegerField(blank=True, null=True, db_comment='死亡时间(数字时间）')
     tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, db_comment='就任土司')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'basic_zhiguan'
@@ -150,7 +145,7 @@ class BasicZhudi(models.Model):
     end_date_3 = models.CharField(max_length=255, blank=True, null=True, db_comment='驻地撤销时间（具体年份-中文）')
     end_date_4 = models.IntegerField(blank=True, null=True, db_comment='驻地撤销时间（数字时间）')
     location = models.CharField(max_length=255, db_comment='驻地所在地区（精确到府）')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'basic_zhudi'
@@ -207,7 +202,7 @@ class RelationshipTusi(models.Model):
     from_tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, db_comment='土司编号1')
     to_tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, related_name='relationshiptusi_to_tusi_set', db_comment='土司编号2')
     relationship = models.CharField(max_length=2, db_comment='土司关系')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'relationship_tusi'
@@ -220,7 +215,7 @@ class RelationshipXiajing(models.Model):
     to_xiajing = models.ForeignKey(BasicZhudi, models.DO_NOTHING, related_name='relationshipxiajing_to_xiajing_set', db_comment='辖境编号2')
     relationship_type = models.CharField(max_length=2, db_comment='辖境关系类型')
     belong_tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, db_comment='所属土司编号')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'relationship_xiajing'
@@ -233,7 +228,7 @@ class RelationshipZhiguan(models.Model):
     to_zhiguan = models.ForeignKey(BasicZhiguan, models.DO_NOTHING, related_name='relationshipzhiguan_to_zhiguan_set', db_comment='职官编号2')
     relationship_type = models.CharField(max_length=3, db_comment='关系类型')
     belong_tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, db_comment='所属土司编号')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'relationship_zhiguan'
@@ -246,7 +241,7 @@ class RelationshipZhudi(models.Model):
     to_zhudi = models.ForeignKey(BasicZhudi, models.DO_NOTHING, related_name='relationshipzhudi_to_zhudi_set', db_comment='土司驻地编号2')
     relationship_type = models.CharField(max_length=2, db_comment='关系类型')
     belong_tusi = models.ForeignKey(BasicTusi, models.DO_NOTHING, db_comment='所属土司编号')
-    author = models.CharField(max_length=255, db_comment='作者')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, db_comment='作者')
 
     class Meta:
         db_table = 'relationship_zhudi'
